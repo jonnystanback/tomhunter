@@ -83,10 +83,10 @@ export function CDRom({
       const cY = Math.cos(yaw);
       const sY = Math.sin(yaw);
 
-      const cream = getComputedStyle(document.documentElement)
-        .getPropertyValue("--cream")
-        .trim();
-      ctx.fillStyle = `rgb(${cream})`;
+      // Fixed cream color (does not flip with theme) — paired with
+      // mix-blend-mode: difference, this gives dark dots on light bg
+      // and light dots on dark bg, while preserving the text-exclusion blend.
+      ctx.fillStyle = "rgb(239, 234, 224)";
 
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i];
