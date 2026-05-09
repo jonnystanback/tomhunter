@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bass: 0;
+  --treble: 0;
+  --cream: 239 234 224;
+  --ink: 15 14 12;
+}
+
+[data-theme="dark"] {
+  --cream: 15 14 12;
+  --ink: 239 234 224;
+}
+
+html,
+body {
+  background: rgb(var(--cream));
+  color: rgb(var(--ink));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body,
+.font-mono {
+  letter-spacing: -0.06em;
+}
+
+::selection {
+  background: rgb(var(--ink));
+  color: rgb(var(--cream));
+}
+
+@layer utilities {
+  .display-shift {
+    transform: scale(calc(1 + var(--bass) * 0.025));
+    transition: transform 60ms linear;
+    will-change: transform;
+  }
+  .dot-divider {
+    background-image: radial-gradient(circle, rgb(var(--ink)) 1px, transparent 1.5px);
+    background-size: 14px 14px;
+    background-repeat: repeat-x;
+    background-position: left center;
+    height: 14px;
+  }
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.06;
+    mix-blend-mode: multiply;
+    z-index: 100;
+  }
+  .marquee {
+    animation: marquee 40s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes th-appear {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.appear {
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+body.loaded .appear {
+  animation-name: th-appear;
+  animation-duration: 800ms;
+  animation-timing-function: cubic-bezier(0.22, 0.7, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .appear,
+  body.loaded .appear {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---------- Loader CD spin ---------- */
+@keyframes cd-spin {
+  to { transform: rotate(360deg); }
+}
+.cd-spin {
+  animation: cd-spin 1.6s linear infinite;
+  transform-origin: center;
+}
+
+/* ---------- CD-ROM (dot HUD) ---------- */
+.cd-rom-canvas {
+  position: absolute;
+  top: 2%;
+  right: 4%;
+  width: clamp(220px, 42vw, 420px);
+  aspect-ratio: 1 / 1;
+  z-index: 20;
+  opacity: 0.9;
+  mix-blend-mode: difference;
+}
+@media (min-width: 768px) {
+  .cd-rom-canvas {
+    top: 0;
+    right: 10%;
+    width: clamp(300px, 38vw, 460px);
+    opacity: 1;
+  }
+}
+@media (min-width: 1024px) {
+  .cd-rom-canvas {
+    top: -2%;
+    right: 16%;
+    width: clamp(340px, 32vw, 480px);
+  }
+}
+
