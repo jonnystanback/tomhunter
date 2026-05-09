@@ -13,6 +13,9 @@ export default async function Home() {
     streams: getStreamCount(t.id),
   }));
 
+  const visible = enriched.slice(0, 25);
+  const hasMore = enriched.length > visible.length;
+
   return (
     <>
       <ReactiveHero />
@@ -27,7 +30,7 @@ export default async function Home() {
               Selected Works
             </h2>
             <div className="text-[10px] sm:text-xs uppercase tracking-widest text-ink/50">
-              {enriched.length} tracks
+              {visible.length} of {enriched.length}
             </div>
           </div>
           <div
@@ -41,11 +44,28 @@ export default async function Home() {
                 Couldn&apos;t reach Spotify right now. Refresh in a moment.
               </div>
             ) : (
-              enriched.map((t, i) => (
+              visible.map((t, i) => (
                 <TrackCard key={t.id} track={t} index={i} />
               ))
             )}
           </div>
+
+          {hasMore && (
+            <div
+              className="appear flex justify-center mt-10"
+              style={{ animationDelay: `${860 + visible.length * 30}ms` }}
+            >
+              <a
+                href="https://open.spotify.com/playlist/52Xx7d3uiz2IbHBydfa7gw?si=58bb58f7afe2402d"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-ink hover:bg-ink hover:text-cream transition-colors uppercase text-xs tracking-widest"
+              >
+                More on Spotify
+                <span aria-hidden>→</span>
+              </a>
+            </div>
+          )}
         </div>
       </section>
     </>
