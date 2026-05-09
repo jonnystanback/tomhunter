@@ -50,7 +50,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
   const rafRef = useRef<number | null>(null);
-  const dataRef = useRef<Uint8Array | null>(null);
+  const dataRef = useRef<Uint8Array<ArrayBuffer> | null>(null);
 
   const ensureGraph = useCallback(() => {
     if (!audioRef.current) {
@@ -75,7 +75,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
       ctxRef.current = ctx;
       analyserRef.current = analyser;
       sourceRef.current = source;
-      dataRef.current = new Uint8Array(analyser.frequencyBinCount);
+      dataRef.current = new Uint8Array(new ArrayBuffer(analyser.frequencyBinCount));
     }
   }, []);
 
