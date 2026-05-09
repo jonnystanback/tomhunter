@@ -21,7 +21,7 @@ export default function About() {
         >
           The
           <br />
-          producer.
+          producer
         </h1>
 
         <div
@@ -32,21 +32,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           <div className="lg:col-span-7 order-2 lg:order-1 space-y-6 text-sm sm:text-base leading-relaxed">
             <p className="appear" style={{ animationDelay: "580ms" }}>
-              Tom Hunter is a producer working at the seam where soul, hip-hop
-              and electronic music meet. He builds records the way other people
-              build rooms — paying attention to corners, picking the light,
-              leaving space for someone to sit down.
-            </p>
-            <p className="appear" style={{ animationDelay: "660ms" }}>
-              His work has been shaped by long nights at the keys, a stack of
-              warped tape, and a stubborn belief that a good song doesn&apos;t
-              need to shout. He produces, writes, and mixes — usually all three
-              at once — collaborating with vocalists and bands across the US
-              and Europe.
-            </p>
-            <p className="appear" style={{ animationDelay: "740ms" }}>
-              When he&apos;s not in the studio he&apos;s probably in another
-              studio, or hunting for a piano with character.
+              Tom Hunter is an LA - based songwriter, producer, and mix engineer.
             </p>
 
             <div
@@ -58,10 +44,14 @@ export default function About() {
               className="appear grid grid-cols-2 gap-4"
               style={{ animationDelay: "900ms" }}
             >
-              <Detail label="Based in" value="—" />
-              <Detail label="Genres" value="Soul · Hip-hop · Electronic" />
-              <Detail label="Credits" value="Multiple" />
-              <Detail label="For" value="Producers, artists, labels" />
+              <Detail label="Based in" value="Los Angeles" />
+              <Detail label="Genres" value="Indie pop · Folk · Indie rock" />
+              <Detail
+                label="Credits"
+                href="https://open.spotify.com/playlist/52Xx7d3uiz2IbHBydfa7gw?si=58bb58f7afe2402d"
+                value="See here →"
+              />
+              <Detail label="For" value="Artists, producers, labels" />
             </div>
 
             <div
@@ -69,7 +59,7 @@ export default function About() {
               style={{ animationDelay: "980ms" }}
             >
               <a
-                href="mailto:hello@tomhunter.com"
+                href="mailto:thomashunter08@gmail.com"
                 className="inline-flex items-center gap-3 px-5 py-3 rounded-full border border-ink hover:bg-ink hover:text-cream transition-colors uppercase text-xs tracking-widest"
               >
                 Get in touch
@@ -102,13 +92,32 @@ export default function About() {
   );
 }
 
-function Detail({ label, value }: { label: string; value: string }) {
+function Detail({
+  label,
+  value,
+  href,
+}: {
+  label: string;
+  value: string;
+  href?: string;
+}) {
   return (
     <div>
       <div className="text-[10px] uppercase tracking-widest text-ink/50 mb-1">
         {label}
       </div>
-      <div className="font-mono text-sm">{value}</div>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-sm underline underline-offset-2 hover:text-ink/60 transition-colors"
+        >
+          {value}
+        </a>
+      ) : (
+        <div className="font-mono text-sm">{value}</div>
+      )}
     </div>
   );
 }

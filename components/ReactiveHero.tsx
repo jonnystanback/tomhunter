@@ -1,15 +1,8 @@
 "use client";
 
-import { formatStreams } from "@/lib/format";
 import { CDRom } from "./CDRom";
 
-export function ReactiveHero({
-  trackCount,
-  totalStreams,
-}: {
-  trackCount: number;
-  totalStreams: number;
-}) {
+export function ReactiveHero() {
   return (
     <section className="relative overflow-hidden px-4 sm:px-8 pt-10 sm:pt-20 pb-4 sm:pb-8">
       <div className="relative max-w-6xl mx-auto">
@@ -43,23 +36,14 @@ export function ReactiveHero({
             style={{ animationDelay: "580ms" }}
           >
             <p className="text-sm sm:text-base leading-relaxed">
-              Producer crafting records that move between rooms — late-night
-              kitchens, headphones on the train, the back of someone&apos;s car.
-              Tap any track below to hear a piece of it.
+              Tom Hunter is an LA - based songwriter, producer, and mix engineer.
             </p>
           </div>
           <div
-            className="appear grid grid-cols-2 sm:grid-cols-1 gap-4 sm:gap-3 self-end"
+            className="appear self-end"
             style={{ animationDelay: "660ms" }}
           >
-            <Stat
-              label="Tracks"
-              value={String(trackCount).padStart(2, "0")}
-            />
-            <Stat
-              label="Total streams"
-              value={totalStreams > 0 ? formatStreams(totalStreams) : "—"}
-            />
+            <Stat label="Total streams" value="35M+" />
           </div>
         </div>
         </div>

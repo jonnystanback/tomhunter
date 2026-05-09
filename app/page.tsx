@@ -13,11 +13,9 @@ export default async function Home() {
     streams: getStreamCount(t.id),
   }));
 
-  const totalStreams = enriched.reduce((s, t) => s + t.streams, 0);
-
   return (
     <>
-      <ReactiveHero trackCount={enriched.length} totalStreams={totalStreams} />
+      <ReactiveHero />
 
       <section className="px-4 sm:px-8 pb-24">
         <div className="max-w-5xl mx-auto">
